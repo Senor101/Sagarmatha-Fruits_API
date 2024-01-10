@@ -1,6 +1,10 @@
 # SAGARMATHA_FRUITS_API
 
+Simple CRUD API for a local fruit business.
+
 <!--- If we have only one group/collection, then no need for the "ungrouped" heading -->
+
+# RESTFUL APIs
 
 1. [GET FRUITS](#1-get-fruits)
 1. [GET FRUIT BY ID](#2-get-fruit-by-id)
