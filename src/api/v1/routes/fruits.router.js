@@ -12,7 +12,7 @@ router.get("/:id",fruitController.getFruitById)
 
 router.post("/",multerUploads,fruitController.createFruit)
 
-router.put("/:id",fruitController.updateFruit)
+router.put("/:id",multerUploads, fruitController.updateFruit)
 
 router.delete("/:id",fruitController.deleteFruit)
 

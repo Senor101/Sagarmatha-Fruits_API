@@ -7,7 +7,12 @@ const parser = new DatauriParser();
 
 const getFruits = async (req,res,next) => {
     try{
-        const fruits = await Fruit.find();
+        const {page = 1, limit = 10} = req.query;
+        const fruits = await Fruit.find()
+        .limit(limit * 1)
+        .skip((page - 1) * limit)
+        .sort({createdAt: -1})
+        .exec();
         return res.status(200).json({
             message:"All fruits fetched successfully",
             data:fruits
@@ -21,6 +26,11 @@ const getFruitById = async (req,res,next) => {
     try{
         const fruitId = req.params.id;
         const fruit = await Fruit.findById(fruitId);
+        if(!fruit){
+            return res.status(404).json({
+                error: "Fruit not found"
+            })
+        }
         return res.status(200).json({
             message: "Fruit fetched successfully",
             data: fruit
@@ -40,8 +50,8 @@ const createFruit = async (req,res,next) => {
             const result = parser.format(".png", imageFile);
             const imageData = await Cloudinary.uploader.upload(result.content, {
                 folder :"Fruits",
-                use_filename : "true",
-                unique_filename : "false"
+                use_filename : true,
+                unique_filename : false
             });
             imageUrl = imageData.secure_url; 
             console.log(imageUrl)
@@ -51,7 +61,7 @@ const createFruit = async (req,res,next) => {
             price: price,
             imageUrl: imageUrl
         });
-        console.log(newFruit)
+        // console.log(newFruit)
         return res.status(201).json({
             message: "Fruit created successfully",
             data: newFruit
@@ -64,12 +74,12 @@ const createFruit = async (req,res,next) => {
 const updateFruit = async (req,res,next) => {
     try{
         const {name,price} = req.body;
-        let updates = {};
         const fruitId = req.params.id;
         const fruit = await Fruit.findById(fruitId);
-        if(fruit == null){
+        let newImageUrl;
+        if(!fruit){
             return res.status(404).json({
-                message: "Fruit not found"
+                error: "Fruit not found"
             })
         }
         if(req.file){
@@ -80,8 +90,19 @@ const updateFruit = async (req,res,next) => {
                 use_filename : true,
                 unique_filename : false
             });
-            updates.imageUrl = imageData.secure_url; 
+            newImageUrl = imageData.secure_url; 
         }
+        const updates = {
+            name: name || fruit.name,
+            price: price || fruit.price,
+            imageUrl: newImageUrl || fruit.imageUrl
+        }
+        Object.assign(fruit, updates);
+        const updatedFruit = await fruit.save();
+        return res.status(200).json({
+            message: "Fruit updated successfully",
+            data: updatedFruit
+        })
 
     }catch(error){
         next(error)
@@ -92,9 +113,9 @@ const deleteFruit = async (req,res,next) => {
     try{
         const fruitId = req.params.id;
         const fruit = await Fruit.findById(fruitId);
-        if(fruit == null){
+        if(!fruit){
             return res.status(404).json({
-                message: "Fruit not found"
+                error: "Fruit not found"
             })
         }
         const deletedFruit = await Fruit.findByIdAndDelete(fruitId);
