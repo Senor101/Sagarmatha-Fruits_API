@@ -16,6 +16,8 @@ Simple CRUD API for a local fruit business.
 
 Every endpoint will respond with required HTTP status codes along side with the provided body.
 
+For the hosted onrender api, `API_URI=https://sagarmatha-fruits-api.onrender.com/api/v1/`
+
 ### 1. GET FRUITS
 
 **_Endpoint:_**
