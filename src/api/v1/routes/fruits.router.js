@@ -4,13 +4,14 @@ const multerUploads = require("../configs/multer.config")
 
 const router = express.Router();
 
-const fruitController = require("../controllers/fruits.controller")
+const fruitController = require("../controllers/fruits.controller");
+const isAuthorized = require('../middlewares/isAuthorized.middleware');
 
-router.get("/",fruitController.getFruits)
+router.get("/",isAuthorized, fruitController.getFruits)
 
 router.get("/:id",fruitController.getFruitById)
 
-router.post("/",multerUploads,fruitController.createFruit)
+router.post("/",isAuthorized,multerUploads,fruitController.createFruit)
 
 router.put("/:id",multerUploads, fruitController.updateFruit)
 

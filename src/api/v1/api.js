@@ -1,6 +1,7 @@
 const express = require("express");
 
 const fruitsRouter = require('./routes/fruits.router')
+const authRouter = require('./routes/auth.router')
 
 const router = express.Router();
 
@@ -9,5 +10,7 @@ router.get("/", (req, res) => {
   });
 
 router.use("/fruits", fruitsRouter);
+
+router.use("/auth",authRouter)
 
 module.exports = router;
