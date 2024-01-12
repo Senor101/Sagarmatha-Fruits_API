@@ -18,6 +18,50 @@ Every endpoint will respond with required HTTP status codes along side with the 
 
 For the hosted onrender api, `API_URI=https://sagarmatha-fruits-api.onrender.com/api/v1/`
 
+### 1. ADMIN LOGIN
+
+**_Endpoint:_**
+
+```bash
+Method: POST
+Type: RAW/JSON
+URL: {{API_URI}}/auth/login/admin
+```
+
+**_Body:_**
+
+```js
+{
+    "email": "test@test.com",
+    "password": "test1234"
+}
+```
+
+**_Response:_**
+
+```
+{
+    "message": "Login successful",
+    "token": "signed_jwt_token"
+}
+```
+
+### **_Headers:_**
+
+The authorization header is required when performing admin related tasks. In case of our api a client should include the token in header when interacting with the endpoints of:
+
+- Create fruit details.
+- Update fruit details.
+- Delete fruit details.
+
+---
+
+| Key           | Value            | Description                                    |
+| ------------- | ---------------- | ---------------------------------------------- |
+| Authorization | signed_jwt_token | Token obtained from response while logging in. |
+
+## Fruits
+
 ### 1. GET FRUITS
 
 **_Endpoint:_**
