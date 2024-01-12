@@ -14,9 +14,11 @@ Simple CRUD API for a local fruit business.
 
 ## Endpoints
 
-Every endpoint will respond with required HTTP status codes along side with the provided body.
+Every endpoint will respond with required HTTP status codes along side with the required body.
 
 For the hosted onrender api, `API_URI=https://sagarmatha-fruits-api.onrender.com/api/v1/`
+
+## Auth
 
 ### 1. ADMIN LOGIN
 
@@ -79,7 +81,7 @@ URL: {{API_URI}}/fruits
     "message": "All fruits fetched successfully",
     "data": [
         {
-            "_id": "659e98b898b863b63882b323",
+            "_id": "fruit_id",
             "name": "apple",
             "price": 69,
             "imageUrl": "https://res.cloudinary.com/dra4rqms4/image/upload/v1704892600/Fruits/dcmkuatx5uudwbcwayhu.jpg",
@@ -96,7 +98,7 @@ URL: {{API_URI}}/fruits
 ```bash
 Method: GET
 Type:
-URL: {{API_URI}}/fruits/659e98b898b863b63882b323
+URL: {{API_URI}}/fruits/fruit_id
 ```
 
 **_Response:_**
@@ -105,7 +107,7 @@ URL: {{API_URI}}/fruits/659e98b898b863b63882b323
 {
     "message": "Fruit fetched successfully",
     "data": {
-        "_id": "659e98b898b863b63882b323",
+        "_id": "fruit_id",
         "name": "mango",
         "price": 69,
         "imageUrl": "https://res.cloudinary.com/dra4rqms4/image/upload/v1704896380/Fruits/kmnamq0uwziuvbetkwde.jpg",
@@ -126,11 +128,11 @@ URL: {{API_URI}}/fruits/
 
 **_Body:_**
 
-| Key   | Value | Description |
-| ----- | ----- | ----------- |
-| name  | apple |             |
-| price | 349.9 |             |
-| image |       |             |
+| Key   | Value      | Description |
+| ----- | ---------- | ----------- |
+| name  | apple      |             |
+| price | 349.9      |             |
+| image | apple.jpeg |             |
 
 **_Response:_**
 
@@ -141,7 +143,7 @@ URL: {{API_URI}}/fruits/
         "name": "apple",
         "price": 349.9,
         "imageUrl": "https://res.cloudinary.com/dra4rqms4/image/upload/v1704892600/Fruits/dcmkuatx5uudwbcwayhu.jpg",
-        "_id": "659e98b898b863b63882b323",
+        "_id": "fruit_id",
         "__v": 0
     }
 }
@@ -155,7 +157,7 @@ URL: {{API_URI}}/fruits/
 ```bash
 Method: PUT
 Type: FORMDATA
-URL: {{API_URI}}/fruits/659e98b898b863b63882b323
+URL: {{API_URI}}/fruits/fruit_id
 ```
 
 **_Body:_**
@@ -171,7 +173,7 @@ URL: {{API_URI}}/fruits/659e98b898b863b63882b323
 {
     "message": "Fruit updated successfully",
     "data": {
-        "_id": "659e98b898b863b63882b323",
+        "_id": fruit_id,
         "name": "mango",
         "price": 69,
         "imageUrl": "https://res.cloudinary.com/dra4rqms4/image/upload/v1704896380/Fruits/kmnamq0uwziuvbetkwde.jpg",
@@ -187,7 +189,7 @@ URL: {{API_URI}}/fruits/659e98b898b863b63882b323
 ```bash
 Method: DELETE
 Type:
-URL: {{API_URI}}/fruits/659e97b91b90ca699de107ef
+URL: {{API_URI}}/fruits/fruit_id
 ```
 
 **_Response:_**
@@ -196,7 +198,7 @@ URL: {{API_URI}}/fruits/659e97b91b90ca699de107ef
 {
     "message": "Fruit deleted successfully",
     "data": {
-        "_id": "659e98b898b863b63882b323",
+        "_id": "fruit_id",
         "name": "mango",
         "price": 69,
         "imageUrl": "https://res.cloudinary.com/dra4rqms4/image/upload/v1704896380/Fruits/kmnamq0uwziuvbetkwde.jpg",
