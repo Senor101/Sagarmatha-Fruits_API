@@ -42,7 +42,7 @@ const getFruitById = async (req,res,next) => {
 
 const createFruit = async (req,res,next) => {
     try{
-        const {name,price} = req.body;
+        const {name,price,unit} = req.body;
         const inputImage = req.file;
         let imageUrl = '';
         if(inputImage != null){
@@ -59,7 +59,8 @@ const createFruit = async (req,res,next) => {
         const newFruit = await Fruit.create({
             name: name,
             price: price,
-            imageUrl: imageUrl
+            imageUrl: imageUrl,
+            unit:unit
         });
         // console.log(newFruit)
         return res.status(201).json({
@@ -73,7 +74,7 @@ const createFruit = async (req,res,next) => {
 
 const updateFruit = async (req,res,next) => {
     try{
-        const {name,price} = req.body;
+        const {name,price,unit} = req.body;
         const fruitId = req.params.id;
         const fruit = await Fruit.findById(fruitId);
         let newImageUrl;

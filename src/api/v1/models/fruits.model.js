@@ -16,7 +16,8 @@ const fruitSchema = new Schema({
     },
     imageUrl : {
         type:String
-    }
+    },
+    unit: String
 })
 
 const Fruit = mongoose.model('Fruit', fruitSchema);

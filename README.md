@@ -66,12 +66,15 @@ The authorization header is required when performing admin related tasks. In cas
 
 ### 1. GET FRUITS
 
+You can pass in page and limit as query for pagination, the default values are as"
+`page=1` and `limit=10`.
+
 **_Endpoint:_**
 
 ```bash
 Method: GET
 Type:
-URL: {{API_URI}}/fruits
+URL: {{API_URI}}/fruits?page=1&limit=5
 ```
 
 **_Response:_**

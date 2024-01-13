@@ -9,7 +9,13 @@ const isAuthorized = (req, res, next) => {
             });
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded;
+        console.log(decoded)
+        if(decoded.email != process.env.ADMIN_EMAIL || decoded.password != process.env.ADMIN_PASSWORD){
+            return res.status(401).json({
+                error: "Unauthorized, Invalid admin token",
+            });
+        
+        }
         next();
     } catch (error) {
         console.log(error)
