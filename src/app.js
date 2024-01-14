@@ -11,7 +11,23 @@ const notFound = require("./api/v1/middlewares/notFound.middleware")
 const cloudinaryConfig = require("./api/v1/configs/cloudinary.config")
 
 app.use(helmet())
-app.use(cors())
+
+const allowedOrigin = ['http://localhost:3000']
+
+var corsOptions = {
+    origin: function (origin, callback) {
+      if (allowedOrigin.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(null,false)
+      }
+    },
+    methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
+    credentials:true,
+    preflightcontinue:true
+}
+
+app.use(cors(corsOptions))
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
