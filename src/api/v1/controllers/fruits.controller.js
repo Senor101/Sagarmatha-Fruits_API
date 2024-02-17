@@ -53,8 +53,7 @@ const createFruit = async (req,res,next) => {
                 use_filename : true,
                 unique_filename : false
             });
-            imageUrl = imageData.secure_url; 
-            console.log(imageUrl)
+            imageUrl = imageData.secure_url;
         }
         const newFruit = await Fruit.create({
             name: name,
@@ -62,7 +61,7 @@ const createFruit = async (req,res,next) => {
             imageUrl: imageUrl,
             unit:unit
         });
-        // console.log(newFruit)
+
         return res.status(201).json({
             message: "Fruit created successfully",
             data: newFruit
@@ -91,12 +90,13 @@ const updateFruit = async (req,res,next) => {
                 use_filename : true,
                 unique_filename : false
             });
-            newImageUrl = imageData.secure_url; 
+            newImageUrl = imageData.secure_url;
         }
         const updates = {
             name: name || fruit.name,
             price: price || fruit.price,
-            imageUrl: newImageUrl || fruit.imageUrl
+            imageUrl: newImageUrl || fruit.imageUrl,
+            unit:unit || fruit.unit
         }
         Object.assign(fruit, updates);
         const updatedFruit = await fruit.save();

@@ -17,7 +17,11 @@ const fruitSchema = new Schema({
     imageUrl : {
         type:String
     },
-    unit: String
+    unit: {
+        type:String,
+        required:[true, "Unit is required for fruits"],
+        trim:true
+    }
 })
 
 const Fruit = mongoose.model('Fruit', fruitSchema);

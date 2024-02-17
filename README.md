@@ -60,7 +60,7 @@ The authorization header is required when performing admin related tasks. In cas
 
 | Key           | Value            | Description                                    |
 | ------------- | ---------------- | ---------------------------------------------- |
-| Authorization | signed_jwt_token | Token obtained from response while logging in. |
+| Authorization | Bearer signed_jwt_token | Token obtained from response while logging in. |
 
 ## Fruits
 
@@ -136,6 +136,7 @@ URL: {{API_URI}}/fruits/
 | name  | apple      |             |
 | price | 349.9      |             |
 | image | apple.jpeg |             |
+| unit  | /kg |             |
 
 **_Response:_**
 
@@ -146,6 +147,7 @@ URL: {{API_URI}}/fruits/
         "name": "apple",
         "price": 349.9,
         "imageUrl": "https://res.cloudinary.com/dra4rqms4/image/upload/v1704892600/Fruits/dcmkuatx5uudwbcwayhu.jpg",
+        "unit": "/kg",
         "_id": "fruit_id",
         "__v": 0
     }
