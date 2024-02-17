@@ -1,21 +1,22 @@
 const jwt = require('jsonwebtoken')
-
-const admin = {
-    email:process.env.ADMIN_EMAIL,
-    password:process.env.ADMIN_PASSWORD
-}
+const bcrypt = require('bcrypt');
+const {adminCredentials} = require('../utils/admin.constant')
 
 const adminLogin = async (req,res,next) => {
     try{
-        const {email,password} = req.body
-        if(email != admin.email || password != admin.password){
+        const {email,password} = req.body;
+        if(email != adminCredentials.email){
             return res.status(401).json({
-                message:"Invalid email or password"
+                message:"Invalid credentials"
             })
         }
+        const isPasswordValid = await bcrypt.compare(password, adminCredentials.password )
+        if(!isPasswordValid)
+            return res.status(403).json({
+                message : "Invalid Credentials"
+            })
         const token = jwt.sign({
-            email:admin.email,
-            password : admin.password
+            id:adminCredentials.id
         },process.env.JWT_SECRET,{
             expiresIn:"2 days"
         })
